@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Voyages et Souvenirs - Adjectifs A1 Pixel Quiz</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Pixel Fonts from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'VT323', monospace;
+            background-color: #2b2b36;
+            color: #f4f4f4;
+            image-rendering: pixelated;
+        }
+
+        .font-pixel {
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        /* Custom Pixel UI Borders & Shadows */
+        .pixel-card {
+            background-color: #3f3f5a;
+            border: 4px solid #1e1e28;
+            box-shadow: 6px 6px 0px #121219, -4px -4px 0px #5a5a7d inset;
+        }
+
+        .pixel-box-inner {
+            background-color: #252538;
+            border: 3px solid #121219;
+            box-shadow: 3px 3px 0px #4d4d6e inset;
+        }
+
+        .pixel-btn {
+            border: 3px solid #121219;
+            box-shadow: 4px 4px 0px #121219;
+            transition: all 0.1s ease;
+            position: relative;
+        }
+
+        .pixel-btn:hover:not(:disabled) {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #121219;
+        }
+
+        .pixel-btn:active:not(:disabled) {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #121219;
+        }
+
+        .pixel-btn-option {
+            background-color: #4a4e69;
+            color: #f2e9e1;
+        }
+
+        .pixel-btn-option:hover:not(:disabled) {
+            background-color: #6b705c;
+        }
+
+        .pixel-btn-primary {
+            background-color: #ffb703;
+            color: #1a1a24;
+        }
+
+        .pixel-btn-primary:hover:not(:disabled) {
+            background-color: #ffc300;
+        }
+
+        /* Stamp animation */
+        @keyframes stampPop {
+            0% { transform: scale(3) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(0.9) rotate(-5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+        }
+
+        .stamp-animate {
+            animation: stampPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* CRT Screen Scanline effect */
+        .scanlines {
+            position: relative;
+            overflow: hidden;
+        }
+        .scanlines::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+            background-size: 100% 4px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e28;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffb703;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-3 sm:p-6 bg-slate-900 scanlines">
+
+    <!-- MAIN CONTAINER -->
+    <div class="w-full max-w-3xl pixel-card rounded-none p-4 sm:p-6 flex flex-col gap-4 relative z-20">
+        
+        <!-- HEADER / TOP BAR -->
+        <header class="flex flex-wrap justify-between items-center bg-slate-950 p-3 border-2 border-slate-800 text-amber-400">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">✈️</span>
+                <span class="font-pixel text-xs sm:text-sm tracking-wider">VOYAGE A1: ADJECTIFS</span>
+            </div>
+            <div class="flex items-center gap-4 text-base sm:text-lg">
+                <button id="sound-btn" onclick="toggleSound()" class="hover:text-amber-200 transition">
+                    🔊 SOUND: ON
+                </button>
+                <div class="bg-amber-500 text-slate-950 px-2 py-0.5 font-bold font-pixel text-xs">
+                    SCORE: <span id="score-display">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- START SCREEN -->
+        <div id="start-screen" class="flex flex-col items-center text-center py-8 px-4 gap-6">
+            <div class="relative my-2">
+                <!-- Pixel Art Style Passport Stamp Canvas/SVG -->
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" class="text-amber-400 mx-auto drop-shadow-md">
+                    <path d="M3 3H21V21H3V3Z" stroke="currentColor" stroke-width="2" stroke-dasharray="2 2"/>
+                    <path d="M7 8L12 5L17 8V16L12 19L7 16V8Z" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                    <path d="M5 12H19" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </div>
+            
+            <div>
+                <h1 class="font-pixel text-lg sm:text-2xl text-amber-300 leading-relaxed mb-2">
+                    L'Aventure des Adjectifs!
+                </h1>
+                <p class="text-xl sm:text-2xl text-slate-300 max-w-xl mx-auto">
+                    Uji kemampuan kata sifat bahasa Prancis (Niveau A1) kamu dalam konteks perjalanan & souvenir!
+                </p>
+            </div>
+
+            <!-- Quiz Info Box -->
+            <div class="pixel-box-inner p-4 text-left text-base sm:text-lg text-slate-300 w-full max-w-md space-y-2">
+                <div class="flex items-center gap-2">
+                    <span class="text-amber-400">📌</span> <span><strong>Tema:</strong> Les Voyages et Souvenirs</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-amber-400">📝</span> <span><strong>Materi:</strong> Gender (M/F) & Number (S/P) Adjectives</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-amber-400">💡</span> <span><strong>Fitur:</strong> Feedback & Penjelasan Lengkap</span>
+                </div>
+            </div>
+
+            <button onclick="startQuiz()" class="pixel-btn pixel-btn-primary font-pixel text-sm sm:text-base px-8 py-4 uppercase tracking-wider cursor-pointer mt-2">
+                🚀 COMMENCER (Mulai)
+            </button>
+        </div>
+
+        <!-- QUIZ SCREEN (Hidden initially) -->
+        <div id="quiz-screen" class="hidden flex-col gap-5">
+            <!-- Progress Bar -->
+            <div class="space-y-1">
+                <div class="flex justify-between text-base sm:text-lg text-amber-300">
+                    <span id="question-tracker">Question 1/10</span>
+                    <span id="category-badge" class="bg-indigo-900 text-indigo-200 px-2 text-xs py-0.5 font-pixel">VOYAGE</span>
+                </div>
+                <div class="w-full bg-slate-950 h-4 border-2 border-slate-800 p-0.5">
+                    <div id="progress-bar" class="bg-amber-400 h-full transition-all duration-300" style="width: 10%;"></div>
+                </div>
+            </div>
+
+            <!-- Question Box -->
+            <div class="pixel-box-inner p-5 space-y-3">
+                <div class="text-sm text-slate-400 uppercase tracking-widest font-pixel flex items-center gap-2">
+                    <span>💬 Context / Hint:</span>
+                    <span id="question-hint" class="text-amber-200 italic font-sans font-normal">--</span>
+                </div>
+                <h2 id="question-text" class="text-2xl sm:text-3xl text-white font-medium leading-snug">
+                    --
+                </h2>
+            </div>
+
+            <!-- Answer Options Grid -->
+            <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Buttons will be injected dynamically -->
+            </div>
+
+            <!-- FEEDBACK PANEL (Shows after answering) -->
+            <div id="feedback-panel" class="hidden pixel-card p-4 rounded-none border-t-4 transition-all duration-200">
+                <div class="flex items-start gap-3">
+                    <div id="feedback-icon" class="text-3xl"></div>
+                    <div class="space-y-1 flex-1">
+                        <div id="feedback-title" class="font-pixel text-sm sm:text-base"></div>
+                        <p id="feedback-explanation" class="text-lg sm:text-xl text-slate-200 leading-snug"></p>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-end">
+                    <button id="next-btn" onclick="nextQuestion()" class="pixel-btn pixel-btn-primary font-pixel text-xs sm:text-sm px-5 py-2.5">
+                        SUIVANT ➔
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULT SCREEN (Hidden initially) -->
+        <div id="result-screen" class="hidden flex-col items-center text-center py-6 gap-6">
+            <div id="result-stamp" class="relative">
+                <div class="border-4 border-dashed border-amber-400 p-4 rounded-lg bg-slate-950/80 inline-block rotate-[-3deg]">
+                    <span class="font-pixel text-xs text-amber-300 uppercase block mb-1">PASSEPORT DE VOYAGE</span>
+                    <span id="final-badge" class="font-pixel text-xl sm:text-2xl text-emerald-400">GRAND VOYAGEUR</span>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <h2 class="font-pixel text-xl sm:text-2xl text-amber-300">FÉLICITATIONS!</h2>
+                <p class="text-2xl text-slate-200">Kamu telah menyelesaikan latihan adjektiva bahasa Prancis!</p>
+            </div>
+
+            <!-- Score Summary Card -->
+            <div class="pixel-box-inner p-5 w-full max-w-md space-y-3 text-left">
+                <div class="flex justify-between items-center border-b border-slate-700 pb-2 text-xl">
+                    <span>Skor Akhir:</span>
+                    <span id="final-score" class="font-pixel text-amber-400 text-lg">0 / 100</span>
+                </div>
+                <div class="flex justify-between items-center border-b border-slate-700 pb-2 text-xl">
+                    <span>Jawaban Benar:</span>
+                    <span id="final-correct" class="text-emerald-400 font-bold">0</span>
+                </div>
+                <div class="flex justify-between items-center text-xl">
+                    <span>Akurasi:</span>
+                    <span id="final-accuracy" class="text-indigo-300 font-bold">0%</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mt-2">
+                <button onclick="restartQuiz()" class="pixel-btn pixel-btn-primary font-pixel text-xs sm:text-sm px-6 py-3">
+                    🔄 RECOMMENCER (Ulangi)
+                </button>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="text-center text-slate-500 text-base pt-2 border-t border-slate-800">
+            Media Pembelajaran Bahasa Prancis A1 • Module: <span class="text-slate-400">Adjectifs & Souvenirs</span>
+        </footer>
+    </div>
+
+    <script>
+        /* Retro Sound Effects Generator using Web Audio API (No external sound files required) */
+        let audioCtx = null;
+        let soundEnabled = true;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('sound-btn');
+            btn.innerText = `🔊 SOUND: ${soundEnabled ? 'ON' : 'OFF'}`;
+        }
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'click') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.exponentialRampToValueAtTime(120, now + 0.05);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now);
+                osc.stop(now + 0.05);
+            } else if (type === 'correct') {
+                // Arpeggio sound
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now); // C5
+                osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+                osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+                osc.frequency.setValueAtTime(1046.50, now + 0.24); // C6
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } else if (type === 'wrong') {
+                // Low error tone
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.setValueAtTime(130, now + 0.12);
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } else if (type === 'fanfare') {
+                // Win melody
+                const notes = [440, 554.37, 659.25, 880];
+                notes.forEach((freq, i) => {
+                    const noteOsc = audioCtx.createOscillator();
+                    const noteGain = audioCtx.createGain();
+                    noteOsc.type = 'square';
+                    noteOsc.connect(noteGain);
+                    noteGain.connect(audioCtx.destination);
+                    noteOsc.frequency.setValueAtTime(freq, now + (i * 0.12));
+                    noteGain.gain.setValueAtTime(0.15, now + (i * 0.12));
+                    noteGain.gain.linearRampToValueAtTime(0.01, now + (i * 0.12) + 0.15);
+                    noteOsc.start(now + (i * 0.12));
+                    noteOsc.stop(now + (i * 0.12) + 0.15);
+                });
+            }
+        }
+
+        /*
+           Question structure:
+           - question: Sentence with a blank (______).
+           - hint: Indonesian contextual hint.
+           - options: Array of 4 options.
+           - correct: Index of correct option (0-3).
+           - explanation: Grammatical rule explanation in Indonesian.
+        */
+        const quizData = [
+            {
+                question: "J'ai acheté une ______ carte postale à Paris.",
+                hint: "Saya membeli sebuah kartu pos yang bagus di Paris. ('carte postale' = Feminin Singuler)",
+                options: ["beau", "belle", "beaux", "belles"],
+                correct: 1,
+                explanation: "Kata 'carte postale' bergender **Féminin Singulier**. Kata sifat 'beau' berubah menjadi **'belle'** untuk kata benda feminin tunggal."
+            },
+            {
+                question: "Nous visitons des monuments ______ di France.",
+                hint: "Kami mengunjungi monumen-monumen bersejarah di Prancis. ('monuments' = Maskulin Plural)",
+                options: ["historique", "historiques", "historiquement", "historiquess"],
+                correct: 1,
+                explanation: "Kata 'monuments' bergender **Masculin Pluriel**. Kata sifat teratur bertambah akhiran **'-s'** menjadi **'historiques'**."
+            },
+            {
+                question: "Ma valise est sangat ______ pour le voyage.",
+                hint: "Koper saya sangat berat untuk perjalanan ini. ('valise' = Feminin Singuler)",
+                options: ["lourd", "lourde", "lourds", "lourdes"],
+                correct: 1,
+                explanation: "Kata 'valise' adalah **Féminin Singulier** (ditandai kata 'ma'). Kata sifat 'lourd' bertambah **'-e'** menjadi **'lourde'**."
+            },
+            {
+                question: "Ce sont des souvenirs ______ du Japon.",
+                hint: "Ini adalah oleh-oleh tradisional dari Jepang. ('souvenirs' = Maskulin Plural)",
+                options: ["traditionnel", "traditionnelle", "traditionnels", "traditionnelles"],
+                correct: 2,
+                explanation: "Kata 'souvenirs' bergender **Masculin Pluriel**. Bentuk dasar 'traditionnel' ditambah **'-s'** menjadi **'traditionnels'**."
+            },
+            {
+                question: "Le musée du Louvre est un ______ endroit.",
+                hint: "Museum Louvre adalah tempat yang besar. ('endroit' = Maskulin Singuler)",
+                options: ["grand", "grande", "grands", "grandes"],
+                correct: 0,
+                explanation: "Kata 'endroit' (tempat) bergender **Masculin Singulier** (ditandai artikel 'un'). Jadi kita menggunakan kata sifat dasar **'grand'**."
+            },
+            {
+                question: "Elle porte une veste ______ pour prendre l'avion.",
+                hint: "Dia memakai jaket biru untuk naik pesawat. ('veste' = Feminin Singuler)",
+                options: ["bleu", "bleue", "bleus", "bleues"],
+                correct: 1,
+                explanation: "Kata 'veste' (jaket) bergender **Féminin Singulier**. Warna kata sifat 'bleu' bertambah akhiran **'-e'** menjadi **'bleue'**."
+            },
+            {
+                question: "Nous faisons un ______ voyage en Italie.",
+                hint: "Kami melakukan perjalanan yang menyenangkan/bagus di Italia. ('voyage' = Maskulin Singuler)",
+                options: ["bon", "bonne", "bons", "bonnes"],
+                correct: 0,
+                explanation: "Kata 'voyage' bergender **Masculin Singulier** ('un voyage'). Kata sifat yang tepat adalah **'bon'** (diletakkan sebelum kata benda)."
+            },
+            {
+                question: "Ils aiment les plages ______ et calmes.",
+                hint: "Mereka menyukai pantai-pantai yang cerah berawan/disinari matahari. ('plages' = Feminin Plural)",
+                options: ["ensoleillé", "ensoleillée", "ensoleillés", "ensoleillées"],
+                correct: 3,
+                explanation: "Kata 'plages' (pantai) bergender **Féminin Pluriel**. Kata sifat mendapat imbuhan **'-e'** (feminin) + **'-s'** (plural) -> **'ensoleillées'**."
+            },
+            {
+                question: "Paris est une ville très ______ la nuit.",
+                hint: "Paris adalah kota yang sangat hidup/ramai di malam hari. ('ville' = Feminin Singuler)",
+                options: ["animé", "animée", "animés", "animées"],
+                correct: 1,
+                explanation: "Kata 'ville' (kota) bergender **Féminin Singulier**. Bentuk kata sifat yang selaras adalah **'animée'** (+e)."
+            },
+            {
+                question: "J'aime acheter des petits objets ______.",
+                hint: "Saya suka membeli barang-barang kecil lokal. ('objets' = Maskulin Plural)",
+                options: ["local", "locale", "locaux", "locales"],
+                correct: 2,
+                explanation: "Kata 'objets' adalah **Masculin Pluriel**. Kata sifat berakhiran **'-al'** (seperti *local*) umumnya berubah menjadi **'-aux'** dalam bentuk maskulin jamak (*locaux*)."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctAnswersCount = 0;
+        let answered = false;
+
+        function startQuiz() {
+            playSound('click');
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            document.getElementById('quiz-screen').classList.add('flex');
+            
+            currentQuestionIndex = 0;
+            score = 0;
+            correctAnswersCount = 0;
+            updateScoreDisplay();
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const currentQ = quizData[currentQuestionIndex];
+
+            // Update Progress & Badges
+            document.getElementById('question-tracker').innerText = `Question ${currentQuestionIndex + 1}/${quizData.length}`;
+            const progressPercent = ((currentQuestionIndex + 1) / quizData.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+            // Update Question text
+            document.getElementById('question-hint').innerText = currentQ.hint;
+            document.getElementById('question-text').innerHTML = formatQuestionText(currentQ.question);
+
+            // Render Options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            currentQ.options.forEach((optionText, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'pixel-btn pixel-btn-option font-pixel text-sm sm:text-base p-4 text-left flex items-center justify-between cursor-pointer w-full';
+                btn.onclick = () => selectAnswer(index);
+                btn.innerHTML = `
+                    <span><strong class="text-amber-400 mr-2">${String.fromCharCode(65 + index)}.</strong> ${optionText}</span>
+                    <span class="option-icon text-lg"></span>
+                `;
+                optionsContainer.appendChild(btn);
+            });
+
+            // Hide feedback panel
+            const feedbackPanel = document.getElementById('feedback-panel');
+            feedbackPanel.classList.add('hidden');
+            feedbackPanel.className = 'hidden pixel-card p-4 rounded-none border-t-4 transition-all duration-200';
+        }
+
+        function formatQuestionText(text) {
+            return text.replace("______", "<u class='text-amber-400 decoration-wavy decoration-2 px-1'>______</u>");
+        }
+
+        function selectAnswer(selectedIndex) {
+            if (answered) return;
+            answered = true;
+
+            const currentQ = quizData[currentQuestionIndex];
+            const isCorrect = selectedIndex === currentQ.correct;
+            const optionsBtns = document.getElementById('options-container').children;
+
+            // Disable all option buttons
+            for (let btn of optionsBtns) {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-slate-700', 'cursor-pointer');
+            }
+
+            const selectedBtn = optionsBtns[selectedIndex];
+            const correctBtn = optionsBtns[currentQ.correct];
+
+            if (isCorrect) {
+                playSound('correct');
+                score += 10;
+                correctAnswersCount++;
+                updateScoreDisplay();
+
+                selectedBtn.classList.remove('pixel-btn-option');
+                selectedBtn.classList.add('bg-emerald-700', 'text-white', 'border-emerald-900');
+                selectedBtn.querySelector('.option-icon').innerText = '✅';
+
+                showFeedback(true, "EXCELLENT! (BENAR)", currentQ.explanation, currentQ.options[currentQ.correct]);
+            } else {
+                playSound('wrong');
+
+                // User's wrong selection styling
+                selectedBtn.classList.remove('pixel-btn-option');
+                selectedBtn.classList.add('bg-rose-800', 'text-white', 'border-rose-950');
+                selectedBtn.querySelector('.option-icon').innerText = '❌';
+
+                // Highlight correct selection
+                correctBtn.classList.remove('pixel-btn-option');
+                correctBtn.classList.add('bg-emerald-700', 'text-white', 'border-emerald-900');
+                correctBtn.querySelector('.option-icon').innerText = '👈 BENAR';
+
+                showFeedback(false, "DOMMAGE! (KURANG TEPAT)", currentQ.explanation, currentQ.options[currentQ.correct]);
+            }
+        }
+
+        function showFeedback(isCorrect, title, explanation, correctAnswerText) {
+            const panel = document.getElementById('feedback-panel');
+            const iconEl = document.getElementById('feedback-icon');
+            const titleEl = document.getElementById('feedback-title');
+            const explEl = document.getElementById('feedback-explanation');
+
+            panel.classList.remove('hidden');
+
+            if (isCorrect) {
+                panel.classList.add('border-emerald-500', 'bg-emerald-950/60');
+                iconEl.innerText = '🎉';
+                titleEl.className = 'font-pixel text-sm sm:text-base text-emerald-400';
+                titleEl.innerText = title;
+                explEl.innerHTML = `${explanation}`;
+            } else {
+                panel.classList.add('border-rose-500', 'bg-rose-950/60');
+                iconEl.innerText = '💡';
+                titleEl.className = 'font-pixel text-sm sm:text-base text-rose-400';
+                titleEl.innerText = title;
+                explEl.innerHTML = `Jawaban yang benar adalah: <strong class="text-amber-300 font-pixel text-xs sm:text-sm uppercase bg-slate-900 px-2 py-0.5 border border-amber-400">${correctAnswerText}</strong>.<br><span class="text-slate-300 text-base sm:text-lg inline-block mt-1">${explanation}</span>`;
+            }
+        }
+
+        function nextQuestion() {
+            playSound('click');
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function updateScoreDisplay() {
+            document.getElementById('score-display').innerText = score;
+        }
+
+        function showResults() {
+            playSound('fanfare');
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('flex');
+            
+            const resultScreen = document.getElementById('result-screen');
+            resultScreen.classList.remove('hidden');
+            resultScreen.classList.add('flex');
+
+            const accuracy = Math.round((correctAnswersCount / quizData.length) * 100);
+
+            document.getElementById('final-score').innerText = `${score} / 100`;
+            document.getElementById('final-correct').innerText = `${correctAnswersCount} / ${quizData.length}`;
+            document.getElementById('final-accuracy').innerText = `${accuracy}%`;
+
+            // Set badge according to score
+            const badgeEl = document.getElementById('final-badge');
+            if (score >= 90) {
+                badgeEl.innerText = "🏆 EXPERT VOYAGEUR (A1)";
+                badgeEl.className = "font-pixel text-lg sm:text-xl text-amber-400";
+            } else if (score >= 60) {
+                badgeEl.innerText = "✈️ BON VOYAGEUR";
+                badgeEl.className = "font-pixel text-lg sm:text-xl text-emerald-400";
+            } else {
+                badgeEl.innerText = "🧳 DEBUTANT EN VOYAGE";
+                badgeEl.className = "font-pixel text-lg sm:text-xl text-rose-400";
+            }
+
+            // Animate badge stamp
+            const stamp = document.getElementById('result-stamp');
+            stamp.classList.remove('stamp-animate');
+            void stamp.offsetWidth; // trigger reflow
+            stamp.classList.add('stamp-animate');
+        }
+
+        function restartQuiz() {
+            playSound('click');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('flex');
+            startQuiz();
+        }
+    </script>
+</body>
+</html>
